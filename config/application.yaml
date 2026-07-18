@@ -1,0 +1,15 @@
+spring:
+  main:
+    #เติมเพื่อปิดการทำงานของ web server
+    web-application-type: none
+  application:
+    name: spring-data-jpa-demo1
+  profiles:
+    active: dev  
+  threads:
+    virtual:
+      enabled: true
+
+logging:
+  config:
+    config/logback-spring.xml    
