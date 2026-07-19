@@ -44,9 +44,9 @@ public class Product {
 	//ถ้า config เพิ่มเติมใน application.properties 
 	//ด้วย spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl  แต่จะมีผลทั้งระบบ
 	//โดย
-	//   ถ้าใส่ @Column(name = "InsertDateTime") ระบบจะใช้ชื่อคอลัมน์ InsertDateTime
-	//   แต่ถ้าไม่ใส่ @Column(name = "InsertDateTime") ระบบจะใช้ชื่อคอลัมน์ insertDateTime
-	//@Column(name = "InsertDateTime")
+	//   ถ้าใส่ @Column(name = "insert_dateTime") ระบบจะใช้ชื่อคอลัมน์ insert_dateTime
+	//   แต่ถ้าไม่ใส่ @Column(name = "insert_dateTime") ระบบจะใช้ชื่อคอลัมน์ insertDateTime
+	@Column(name = "insert_dateTime")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSXXX")
 	LocalDateTime insertDateTime;
 }
