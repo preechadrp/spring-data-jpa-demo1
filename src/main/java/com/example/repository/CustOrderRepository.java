@@ -14,7 +14,7 @@ import com.example.model.CustOrder;
 public interface CustOrderRepository extends JpaRepository<CustOrder, String> {
 
 	@Query(value = """
-			SELECT * FROM cust_order WHERE order_id != :orderId and total_amount >= :total_amount
+			SELECT * FROM cust_order WHERE orderid != :orderId and totalamount >= :total_amount
 			""", nativeQuery = true)
 	List<CustOrder> findTotalAmount(@Param("orderId") String orderId, @Param("total_amount") BigDecimal totalAmount);
 }

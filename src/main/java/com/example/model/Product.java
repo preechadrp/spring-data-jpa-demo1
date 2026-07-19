@@ -34,18 +34,19 @@ public class Product {
 	Long id;
 
 	// 2. นำ comment เข้ามารวมใน @Column ของ JPA ได้เลย
-	//@Column(name = "name", length = 100, nullable = false, comment = "ชื่อสินค้า") 
-	//การระบุ name = "name" ไม่จำเป็นเพราะชื่อฟิลด์ตรงกับชื่อคอลัมน์อยู่แล้ว
 	@Column(length = 100, nullable = false, comment = "ชื่อสินค้า") // 3. กำหนดความยาวของ String เป็น 100 และไม่อนุญาตให้เป็น null
 	String name;
 
 	@Column(precision = 18, scale = 2, comment = "ราคาสินค้า") // 4. กำหนดความยาวและทศนิยมเพื่อให้ตารางสร้างเป็น DECIMAL(18,2)
 	BigDecimal price;
 
-	// บอก Spring Data JPA ว่าฟิลด์นี้คือ InsertDateTime ใน Database 
-	// ถ้าไม่ระบุมันจะหาชื่อ insert_date_time เพราะมันจะทำการแปลงชื่อฟิลด์เป็น snake_case โดยอัตโนมัติ
-	// เนื่องจากเราตั้งชื่อฟิลด์เป็นแบบ CamelCase แต่ใน Database เราตั้งชื่อเป็น InsertDateTime (PascalCase) ดังนั้นเราต้องระบุชื่อคอลัมน์ให้ตรงกัน
-	//@Column(name = "insertDateTime") ถ้าระบุว่าต้องการแบบนี้ต้อง config เพิ่มเติมใน application.properties ด้วย spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl  แต่จะมีผลทั้งระบบ
+	//ปกติ jpa จะแปลงและจะหาชื่อ insert_date_time เพราะมันจะทำการแปลงชื่อฟิลด์จาก camel case เป็น snake_case โดยอัตโนมัติ
+	//ถ้า config เพิ่มเติมใน application.properties 
+	//ด้วย spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl  แต่จะมีผลทั้งระบบ
+	//โดย
+	//   ถ้าใส่ @Column(name = "InsertDateTime") ระบบจะใช้ชื่อคอลัมน์ InsertDateTime
+	//   แต่ถ้าไม่ใส่ @Column(name = "InsertDateTime") ระบบจะใช้ชื่อคอลัมน์ insertDateTime
+	//@Column(name = "InsertDateTime")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSXXX")
 	LocalDateTime insertDateTime;
 }
