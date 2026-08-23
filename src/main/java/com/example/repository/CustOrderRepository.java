@@ -16,5 +16,8 @@ public interface CustOrderRepository extends JpaRepository<CustOrder, String> {
 	@Query(value = """
 			SELECT * FROM cust_order WHERE orderid != :orderId and totalamount >= :total_amount
 			""", nativeQuery = true)
-	List<CustOrder> findTotalAmount(@Param("orderId") String orderId, @Param("total_amount") BigDecimal totalAmount);
+	List<CustOrder> findTotalAmountByNativeSql(@Param("orderId") String orderId, @Param("total_amount") BigDecimal totalAmount);
+
+	@Query("SELECT c FROM CustOrder c WHERE c.totalAmount >= :total_amount")
+	List<CustOrder> findTotalAmount(@Param("total_amount") BigDecimal totalAmount);
 }

@@ -17,20 +17,30 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-	// 1. Spring Data จะเดา SQL ให้จากชื่อ Method (Query Method)
+	// Spring Data จะเดา SQL ให้จากชื่อ Method (Query Method)
 	List<Product> findByName(String name);
 
-	// 2. เขียน SQL เองแบบตรงไปตรงมา (Native SQL)
+	// เขียน SQL เองแบบตรงไปตรงมา (Native SQL)
 	@Query(value = "SELECT * FROM PRODUCT WHERE price > :minPrice", nativeQuery = true)
+	List<Product> findExpensiveProductsByNativeSql(@Param("minPrice") BigDecimal minPrice);
+
+	@Query("SELECT p FROM Product p WHERE p.price > :minPrice")
 	List<Product> findExpensiveProducts(@Param("minPrice") BigDecimal minPrice);
 
-	// 3. ใส่ clearAutomatically = true เพื่อไม่ให้ค่าเก่าค้างในหน่วยความจำหลังจากอัปเดต
+	//update โดยใช้ Native SQL
+	// ใส่ clearAutomatically = true เพื่อไม่ให้ค่าเก่าค้างในหน่วยความจำหลังจากอัปเดต
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query(value = "UPDATE PRODUCT SET price = :newPrice WHERE id = :id", nativeQuery = true)
+	int updatePriceByNativeSql(@Param("id") Long id, @Param("newPrice") BigDecimal newPrice);
+
+	//update โดยใช้ JPQL
+	@Transactional
+	@Modifying(clearAutomatically = true)
+	@Query("UPDATE Product p SET p.price = :newPrice WHERE p.id = :id")
 	int updatePrice(@Param("id") Long id, @Param("newPrice") BigDecimal newPrice);
 
-	// 4. เปลี่ยนมาใช้ JPQL (Query ระดับ Object) เพื่อดึงข้อมูลใส่ Record/DTO โดยตรง
+	// เปลี่ยนมาใช้ JPQL (Query ระดับ Object) เพื่อดึงข้อมูลใส่ Record/DTO โดยตรง
 	// (สมมติว่า ProductSummary อยู่ใน package com.example.dto)
 	// สังเกตว่าใน JPQL เราจะอ้างอิงชื่อคลาส "Product" แทนชื่อตาราง
 	@Query("SELECT new com.example.dto.ProductSummary(p.id, p.name) FROM Product p")

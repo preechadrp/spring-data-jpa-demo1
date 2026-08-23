@@ -80,9 +80,9 @@ public class SpringDataJpaDemo1Application {
 			var cust1 = custOrderRepository.save(custOrder);
 			log.info("cust1 : " + cust1.toString());
 
-			custOrderRepository.findTotalAmount(cust1.getOrderId(), new BigDecimal("5000.00")).forEach(order -> {
+			custOrderRepository.findTotalAmount(new BigDecimal("5000.00")).forEach(order -> {
 
-				log.info("Update order: " + order.getOrderId());
+				log.info("Update = " + order.getOrderId());
 
 				order.setTotalAmount(new BigDecimal(4000.00));
 				custOrderRepository.save(order);
