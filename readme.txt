@@ -16,3 +16,4 @@ com.example.app
 ├── config/           (พวกไฟล์ตั้งค่าต่างๆ)
 ├── component/        (พวก Bean ที่ไม่ใช่ Service / Repository / Controller)
 └── exception/        (ดักจับและจัดการ Error)
+- http://localhost:8080/products   //เป็น endpoint สำหรับทดสอบแสดงข้อมูลใน Product

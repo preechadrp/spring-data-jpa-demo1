@@ -47,6 +47,6 @@ public class Product {
 	//   ถ้าใส่ @Column(name = "insert_dateTime") ระบบจะใช้ชื่อคอลัมน์ insert_dateTime
 	//   แต่ถ้าไม่ใส่ @Column(name = "insert_dateTime") ระบบจะใช้ชื่อคอลัมน์ insertDateTime
 	@Column(name = "insert_date_time")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSXXX")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
 	LocalDateTime insertDateTime;
 }

@@ -1,9 +1,9 @@
 spring:
   application:
       name: spring-data-jpa-demo1
-  main:
-    #เติมเพื่อปิดการทำงานของ web server
-    web-application-type: none
+  #main:
+    #เติมเพื่อปิดการทำงานของ web server เมื่อรัน Spring Boot Application แบบ Command Line Application
+    #web-application-type: none
   profiles:
     active: dev  
   threads:
