@@ -4,6 +4,7 @@
 -ทดสอบการ Insert และ Update ข้อมูลใน CustOrder โดย primary key เรา generate เอง
 -การสร้างฟิดล์แบบ camel case ในตาราง CustOrder เพื่อให้ spring data jdbc map ข้อมูลได้ถูกต้องซึ่งแปลงจาก camel case เป็น snake case โดยอัตโนมัติ
 -การใช้ java-uuid-generator เพื่อสร้าง UUIDv7 ให้กับ primary key ของ CustOrder
+-การใช้ @IdClass เพื่อสร้าง primary key แบบ composite key ในตาราง OrderItem
 ---แนวทางปฏิบัติการว่างโครงสร้างโปรเจ็ค --- 
 com.example.app
 ├── controller/       (รับ Request/Response จากภายนอก)
